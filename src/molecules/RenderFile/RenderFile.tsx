@@ -14,13 +14,16 @@ interface IRenderFile {
   name             : string;
   path             : string[];
   setPath          : React.Dispatch<React.SetStateAction<string[]>>;
+  setForwardStack  : React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export default function RenderFile(props: IRenderFile): JSX.Element {
-  const { name, path, setPath, isDirectory } = props;
+  const { name, path, setPath, isDirectory, setForwardStack } = props;
 
   function onDoubleClick() {
     if (isDirectory) setPath([...path, name]);
+    setForwardStack([]);
+
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {

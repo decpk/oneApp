@@ -1,3 +1,4 @@
 import Appbar from "./Appbar";
+import FileExplorerToolbar from "./FileExplorerToolbar";
 
-export { Appbar };
+export { Appbar, FileExplorerToolbar };

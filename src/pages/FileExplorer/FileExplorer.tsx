@@ -3,11 +3,18 @@ import { IFileExplorerProps } from "./FileExplorer.types";
 import { FcFolder } from "react-icons/fc";
 import { RenderFile } from "@/molecules";
 import { FileExplorerWrapper, FilesWrapper } from "./FileExplorer.styles";
+import { FileExplorerToolbar } from "@/organisms";
 
 function FileExplorer(props: IFileExplorerProps) {
-  const {}                    = props;
-  const [path, setPath]       = useState<string[]>([]);
-  const [dirData, setDirData] = useState<{ name: string }[]>([]);
+  const {}                              = props;
+  const [path, setPath]                 = useState<string[]>([]);
+  const [dirData, setDirData]           = useState<{ name: string }[]>([]);
+  const [forwardStack, setForwardStack] = useState<string[]>([]);
+  console.log(
+    `🤞🤞🤞 ~ file: FileExplorer.tsx:11 ~ FileExplorer ~ path`,
+    path,
+    forwardStack
+  );
 
   useEffect(() => {
     (async () => {
@@ -28,13 +35,39 @@ function FileExplorer(props: IFileExplorerProps) {
     })();
   }, [path]);
 
+  function handleBackClick() {
+    const pathClone = [...path];
+    const lastPath  = pathClone.pop();
+    setPath([...pathClone]);
+    if (lastPath) setForwardStack([lastPath, ...forwardStack]);
+  }
+
+  function handleForwardClick() {
+    const [first, ...restForwardStack] = [...forwardStack];
+    if (first) {
+      setPath([...path, first]);
+      setForwardStack([...restForwardStack]);
+    }
+  }
+
   return (
     <FileExplorerWrapper>
-      <div>path: {path}</div>
+      <FileExplorerToolbar
+        path               = {path}
+        handleBackClick    = {handleBackClick}
+        forwardStack       = {forwardStack}
+        handleForwardClick = {handleForwardClick}
+      />
       <FilesWrapper>
-      {dirData.map((o: any, index: number) => (
-        <RenderFile key = {index} path = {path} setPath = {setPath} {...o} />
-      ))}
+        {dirData.map((o: any, index: number) => (
+          <RenderFile
+            key          = {index}
+            path         = {path}
+            setPath      = {setPath}
+            setForwardStack = {setForwardStack}
+            {...o}
+          />
+        ))}
       </FilesWrapper>
     </FileExplorerWrapper>
   );
