@@ -10,11 +10,6 @@ function FileExplorer(props: IFileExplorerProps) {
   const [path, setPath]                 = useState<string[]>([]);
   const [dirData, setDirData]           = useState<{ name: string }[]>([]);
   const [forwardStack, setForwardStack] = useState<string[]>([]);
-  console.log(
-    `🤞🤞🤞 ~ file: FileExplorer.tsx:11 ~ FileExplorer ~ path`,
-    path,
-    forwardStack
-  );
 
   useEffect(() => {
     (async () => {
@@ -61,9 +56,9 @@ function FileExplorer(props: IFileExplorerProps) {
       <FilesWrapper>
         {dirData.map((o: any, index: number) => (
           <RenderFile
-            key          = {index}
-            path         = {path}
-            setPath      = {setPath}
+            key             = {index}
+            path            = {path}
+            setPath         = {setPath}
             setForwardStack = {setForwardStack}
             {...o}
           />
