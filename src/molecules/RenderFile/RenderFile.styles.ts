@@ -28,4 +28,5 @@ export const StyledFileName = styled.div`
   text-overflow: ellipsis;
   overflow     : hidden;
   cursor       : default;
+  font-size    : 12px;
 `;
