@@ -2,7 +2,7 @@ import { Paper } from "@mui/material";
 import styled from "styled-components";
 
 export const StyledToolbarWrapper = styled(Paper)`
-  background-color: black !important;
+  background-color: var(--background-color-primary) !important;
   height          : 60px;
   border-radius   : 0 !important;
   color           : #ccc !important;
@@ -10,5 +10,5 @@ export const StyledToolbarWrapper = styled(Paper)`
   display         : flex;
   align-items     : center;
   gap             : 1rem;
-  border-bottom   : 1px solid #181818;
+  border-bottom   : 1px solid var(--background-color-secondary);
 `;

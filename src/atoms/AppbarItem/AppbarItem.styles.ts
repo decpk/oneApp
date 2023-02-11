@@ -31,7 +31,7 @@ export const StyledLink = styled(Link)`
     width: 18px;
   }
   &.is-active {
-    background-color: var(--primary-color);
+    background-color: var(--color-primary);
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
 
     svg {

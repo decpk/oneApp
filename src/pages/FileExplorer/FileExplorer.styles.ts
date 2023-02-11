@@ -21,4 +21,5 @@ export const FilesWrapper                     = styled.div`
   gap                  : 1rem;
   padding              : 1rem;
   grid-auto-rows       : 100px;
+  overflow: auto;
 `;

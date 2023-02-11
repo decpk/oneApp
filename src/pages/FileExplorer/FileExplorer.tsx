@@ -26,7 +26,7 @@ function FileExplorer(props: IFileExplorerProps) {
     (async () => {
       const paths: IFsPaths = await (window as any)?.electronAPI?.getPaths();
       setPaths(paths);
-        // CHANGE PATH SEPARATOR AS PER OS
+        // TODO:CHANGE PATH SEPARATOR AS PER OS
       setPath(paths.downloads.split("/"));
     })();
   }, []);
@@ -35,6 +35,7 @@ function FileExplorer(props: IFileExplorerProps) {
     (async () => {
       if (path.length) {
         const allFilesInfo = await (window as any)?.electronAPI?.readdir(
+          // TODO: ADD SEPARATOR AS PER THE OS
           path.join("/")
         );
         setDirData(allFilesInfo);
@@ -67,7 +68,7 @@ function FileExplorer(props: IFileExplorerProps) {
           forwardStack={forwardStack}
           handleForwardClick={handleForwardClick}
         />
-        <FileExplorerFolders paths={paths}/>
+        <FileExplorerFolders paths={paths} path={path} setPath={setPath}/>
       </StyledFileExplorerContentBox>
       
       <StyledFileExplorerContentBox>

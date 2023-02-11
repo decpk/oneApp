@@ -5,6 +5,6 @@ export const StyledFoldersWrapper = styled.div`
   flex-direction: column;
   gap           : 0.25rem;
   padding       : .5rem;
-  border-right  : 1px solid #181818;
+  border-right  : 1px solid var(--background-color-secondary);
   overflow      : auto;
 `;
