@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { IFileExplorerProps } from "./FileExplorer.types";
-import { FcFolder } from "react-icons/fc";
 import { RenderFile } from "@/molecules";
-import { FileExplorerWrapper, FilesWrapper } from "./FileExplorer.styles";
+import {
+  FileExplorerWrapper,
+  FilesWrapper,
+  StyledFileExplorerContent,
+  StyledFileExplorerFoldersWrapper,
+} from "./FileExplorer.styles";
 import { FileExplorerToolbar } from "@/organisms";
 
 function FileExplorer(props: IFileExplorerProps) {
@@ -47,23 +51,28 @@ function FileExplorer(props: IFileExplorerProps) {
 
   return (
     <FileExplorerWrapper>
-      <FileExplorerToolbar
-        path               = {path}
-        handleBackClick    = {handleBackClick}
-        forwardStack       = {forwardStack}
-        handleForwardClick = {handleForwardClick}
-      />
-      <FilesWrapper>
-        {dirData.map((o: any, index: number) => (
-          <RenderFile
-            key             = {index}
-            path            = {path}
-            setPath         = {setPath}
-            setForwardStack = {setForwardStack}
-            {...o}
-          />
-        ))}
-      </FilesWrapper>
+      <StyledFileExplorerFoldersWrapper>
+        folders
+      </StyledFileExplorerFoldersWrapper>
+      <StyledFileExplorerContent>
+        <FileExplorerToolbar
+          path               = {path}
+          handleBackClick    = {handleBackClick}
+          forwardStack       = {forwardStack}
+          handleForwardClick = {handleForwardClick}
+        />
+        <FilesWrapper>
+          {dirData.map((o: any, index: number) => (
+            <RenderFile
+              key             = {index}
+              path            = {path}
+              setPath         = {setPath}
+              setForwardStack = {setForwardStack}
+              {...o}
+            />
+          ))}
+        </FilesWrapper>
+      </StyledFileExplorerContent>
     </FileExplorerWrapper>
   );
 }
