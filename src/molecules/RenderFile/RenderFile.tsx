@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import { FcFolder, FcFile } from "react-icons/fc";
 import { AiOutlineFile } from "react-icons/ai";
 import { setCurrentPath } from "@/redux/fileExplorerSlice";
@@ -15,7 +14,6 @@ function RenderFile(props: IRenderFile): JSX.Element {
     setPath,
     isDirectory,
     setForwardStack,
-    fileExplorer,
     setCurrentPath,
   } = props;
 
@@ -51,9 +49,4 @@ function RenderFile(props: IRenderFile): JSX.Element {
   );
 }
 
-const mapStateToProps = (state: { fileExplorer: any }, _props: any) => ({
-  fileExplorer: state.fileExplorer,
-});
-const mapDispatch = { setCurrentPath };
-
-export default connect(mapStateToProps, mapDispatch)(RenderFile);
+export default RenderFile;

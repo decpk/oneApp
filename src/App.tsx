@@ -10,36 +10,36 @@ function Loading() {
   return <h4> Loading </h4>;
 }
 type IProps = {
-  store: any;
+  store  : any;
   history: any;
 };
 function App({ store, history }: IProps) {
   return (
-    <StyledAppWrapper>
-      <Provider store={store}>
-        <HistoryRouter history={history}>
+    <HistoryRouter history = {history}>
+      <StyledAppWrapper>
+        <Provider store = {store}>
+          <Appbar />
           <StyledPageContent>
-            <Appbar />
             <Routes>
               {apps.map((app) => {
                 const { Element, path, title } = app;
                 return (
                   <Route
-                    path={path}
-                    element={
-                      <Suspense fallback={<Loading />}>
+                    path    = {path}
+                    element = {
+                      <Suspense fallback = {<Loading />}>
                         <Element />
                       </Suspense>
                     }
-                    key={title}
+                    key = {title}
                   />
                 );
               })}
             </Routes>
           </StyledPageContent>
-        </HistoryRouter>
-      </Provider>
-    </StyledAppWrapper>
+        </Provider>
+      </StyledAppWrapper>
+    </HistoryRouter>
   );
 }
 

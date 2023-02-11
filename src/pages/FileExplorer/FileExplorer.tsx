@@ -16,17 +16,17 @@ import { ToolbarWrapper } from "../../atoms";
 import { IFsPaths } from "../../interfaces/fs";
 
 function FileExplorer(props: IFileExplorerProps) {
-  const {} = props;
-  const [paths, setPaths] = useState<IFsPaths | null>(null);
-  const [path, setPath] = useState<string[]>([]);
-  const [dirData, setDirData] = useState<{ name: string }[]>([]);
+  const {}                              = props;
+  const [paths, setPaths]               = useState<IFsPaths | null>(null);
+  const [path, setPath]                 = useState<string[]>([]);
+  const [dirData, setDirData]           = useState<{ name: string }[]>([]);
   const [forwardStack, setForwardStack] = useState<string[]>([]);
 
   useEffect(() => {
     (async () => {
       const paths: IFsPaths = await (window as any)?.electronAPI?.getPaths();
       setPaths(paths);
-        // TODO:CHANGE PATH SEPARATOR AS PER OS
+          // TODO:CHANGE PATH SEPARATOR AS PER OS
       setPath(paths.downloads.split("/"));
     })();
   }, []);
@@ -35,7 +35,7 @@ function FileExplorer(props: IFileExplorerProps) {
     (async () => {
       if (path.length) {
         const allFilesInfo = await (window as any)?.electronAPI?.readdir(
-          // TODO: ADD SEPARATOR AS PER THE OS
+              // TODO: ADD SEPARATOR AS PER THE OS
           path.join("/")
         );
         setDirData(allFilesInfo);
@@ -45,7 +45,7 @@ function FileExplorer(props: IFileExplorerProps) {
 
   function handleBackClick() {
     const pathClone = [...path];
-    const lastPath = pathClone.pop();
+    const lastPath  = pathClone.pop();
     setPath([...pathClone]);
     if (lastPath) setForwardStack([lastPath, ...forwardStack]);
   }
@@ -60,7 +60,6 @@ function FileExplorer(props: IFileExplorerProps) {
 
   return (
     <FileExplorerWrapper>
-
       <StyledFileExplorerContentBox>
         <FileExplorerFolderToolbar
           path               = {path}
@@ -68,29 +67,28 @@ function FileExplorer(props: IFileExplorerProps) {
           forwardStack       = {forwardStack}
           handleForwardClick = {handleForwardClick}
         />
-        <FileExplorerFolders paths={paths} path={path} setPath={setPath}/>
+        <FileExplorerFolders paths = {paths} path = {path} setPath = {setPath} />
       </StyledFileExplorerContentBox>
-      
+
       <StyledFileExplorerContentBox>
         <FileExplorerContentToolbar
-          path={path}
-          handleBackClick={handleBackClick}
-          forwardStack={forwardStack}
-          handleForwardClick={handleForwardClick}
+          path               = {path}
+          handleBackClick    = {handleBackClick}
+          forwardStack       = {forwardStack}
+          handleForwardClick = {handleForwardClick}
         />
         <FilesWrapper>
           {dirData.map((o: any, index: number) => (
             <RenderFile
-              key={index}
-              path={path}
-              setPath={setPath}
-              setForwardStack={setForwardStack}
+              key             = {index}
+              path            = {path}
+              setPath         = {setPath}
+              setForwardStack = {setForwardStack}
               {...o}
             />
           ))}
         </FilesWrapper>
       </StyledFileExplorerContentBox>
-      
     </FileExplorerWrapper>
   );
 }
