@@ -9,6 +9,10 @@ const electronAPI = {
     const filesInfo = await ipcRenderer.invoke("readdir", {path});
     return filesInfo;
   },
+  openPath: async (path: string) => {
+    const response = await ipcRenderer.invoke("openPath", {path});
+    return response;
+  },
 };
 
 // window.electronAPI

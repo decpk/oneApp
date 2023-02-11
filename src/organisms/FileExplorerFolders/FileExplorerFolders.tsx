@@ -46,10 +46,6 @@ const FileExplorerFolders = (props: Props) => {
   const pathAsString = path.join("/");
 
   function onSelectPath(selectedPath: string) {
-    console.log(
-      `🤞🤞🤞 ~ file: FileExplorerFolders.tsx:48 ~ FileExplorerFolders ~ e`,
-      selectedPath
-    );
     setPath(selectedPath.split('/'))
   }
 

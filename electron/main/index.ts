@@ -185,3 +185,10 @@ ipcMain.handle("readdir", async (_, args) => {
     });
     return result;
 });
+
+ipcMain.handle("openPath", async (_, args) => {
+    const {
+        path
+    } = args as any;
+    await shell.openPath(path);
+});
