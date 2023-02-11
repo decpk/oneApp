@@ -63,10 +63,10 @@ function FileExplorer(props: IFileExplorerProps) {
 
       <StyledFileExplorerContentBox>
         <FileExplorerFolderToolbar
-          path={path}
-          handleBackClick={handleBackClick}
-          forwardStack={forwardStack}
-          handleForwardClick={handleForwardClick}
+          path               = {path}
+          handleBackClick    = {handleBackClick}
+          forwardStack       = {forwardStack}
+          handleForwardClick = {handleForwardClick}
         />
         <FileExplorerFolders paths={paths} path={path} setPath={setPath}/>
       </StyledFileExplorerContentBox>

@@ -13,9 +13,9 @@ export const RenderFileWrapper = styled.button`
   border          : none;
   opacity: ${(props) => props.name?.startsWith('.') ? '0.3': 1};
 
-  svg {
-    height: 70px;
-    width : 100%;
+  img, svg {
+    height: 60px;
+    width : 60px;
   }
 
   :hover {
