@@ -1,10 +1,10 @@
 import React from "react";
 import IconButton from "@mui/material/IconButton";
 
-interface IIconAsButtonProps  {
-    children : JSX.Element;
-    onClick ?: React.MouseEventHandler<HTMLButtonElement>;
-    disabled?: boolean;
+interface IIconAsButtonProps {
+  children : JSX.Element;
+  onClick ?: React.MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
 }
 
 export default function IconAsButton(props: IIconAsButtonProps): JSX.Element {
@@ -15,17 +15,17 @@ export default function IconAsButton(props: IIconAsButtonProps): JSX.Element {
       size     = "small"
       disabled = {disabled}
       sx       = {{
-        backgroundColor: "#333",
-        borderRadius   : "4px",
-        cursor         : "pointer",
-        "&:hover"      : {
+        color       : "white",
+        borderRadius: "4px",
+        cursor      : "pointer",
+        "&:hover"   : {
           backgroundColor: "#555",
         },
-        "&:disabled"   :{
-          backgroundColor: '#121212',
+        "&:disabled": {
+          backgroundColor: "#121212",
           color          : "#222",
-          cursor         : "default"
-        }
+          cursor         : "default",
+        },
       }}
     >
       {children}

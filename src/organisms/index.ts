@@ -1,4 +1,11 @@
 import Appbar from "./Appbar";
-import FileExplorerToolbar from "./FileExplorerToolbar";
+import FileExplorerContentToolbar from "./FileExplorerContentToolbar";
+import FileExplorerFolderToolbar from "./FileExplorerFolderToolbar";
+import FileExplorerFolders from "./FileExplorerFolders";
 
-export { Appbar, FileExplorerToolbar };
+export {
+  Appbar,
+  FileExplorerContentToolbar,
+  FileExplorerFolderToolbar,
+  FileExplorerFolders,
+};

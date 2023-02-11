@@ -32,9 +32,10 @@ export default function RenderFile(props: IRenderFile): JSX.Element {
 
   return (
     <RenderFileWrapper
-      key = {name}
+      key           = {name}
       onDoubleClick = {onDoubleClick}
       onKeyDown     = {onKeyDown}
+      name          = {name}
     >
       {isDirectory ? <FcFolder /> : <FcFile />}
       <StyledFileName>{name}</StyledFileName>
