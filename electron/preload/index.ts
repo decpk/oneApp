@@ -1,8 +1,8 @@
 import { contextBridge, ipcRenderer } from "electron";
 
 const electronAPI = {
-  getHomePath: async () => {
-    const result = await ipcRenderer.invoke("path");
+  getPaths: async () => {
+    const result = await ipcRenderer.invoke("paths");
     return result;
   },
   readdir: async (path: string) => {

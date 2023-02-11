@@ -1,26 +1,12 @@
 import React from "react";
-import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { connect } from "react-redux";
 import { FcFolder, FcFile } from "react-icons/fc";
 import { AiOutlineFile } from "react-icons/ai";
 import { setCurrentPath } from "@/redux/fileExplorerSlice";
 import { RenderFileWrapper, StyledFileName } from "./RenderFile.styles";
-
-interface IRenderFile {
-  isDirectory      : boolean;
-  isFile           : boolean;
-  isSymbolicLink   : boolean;
-  isBlockDevice    : boolean;
-  isCharacterDevice: boolean;
-  isFIFO           : boolean;
-  isSocket         : boolean;
-  name             : string;
-  path             : string[];
-  fileExplorer     : any;
-  setPath          : React.Dispatch<React.SetStateAction<string[]>>;
-  setForwardStack  : React.Dispatch<React.SetStateAction<string[]>>;
-  setCurrentPath   : ActionCreatorWithPayload<string[], string>;
-}
+import { Tooltip } from "@mui/material";
+import { getFileIcon, getFolderIcon } from '../../constants/FileIcon';
+import { IRenderFile } from "./RenderFile.types";
 
 function RenderFile(props: IRenderFile): JSX.Element {
   const {
@@ -44,14 +30,24 @@ function RenderFile(props: IRenderFile): JSX.Element {
   }
 
   return (
-    <RenderFileWrapper
-      key           = {name}
-      onDoubleClick = {onDoubleClick}
-      onKeyDown     = {onKeyDown}
+    <Tooltip
+      title      = {name}
+      enterDelay = {500}
+      arrow
     >
-      {isDirectory ? <FcFolder /> : <FcFile />}
-      <StyledFileName>{name}</StyledFileName>
-    </RenderFileWrapper>
+      <RenderFileWrapper
+        key           = {name}
+        onDoubleClick = {onDoubleClick}
+        onKeyDown     = {onKeyDown}
+        name          = {name}
+      >
+        {isDirectory ? 
+          <img src = {getFolderIcon(name.toLowerCase())} alt = "js" />:
+          <img src = {getFileIcon(name.toLowerCase())} alt = "js" />
+        }
+        <StyledFileName>{name}</StyledFileName>
+      </RenderFileWrapper>
+    </Tooltip>
   );
 }
 

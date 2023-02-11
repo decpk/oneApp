@@ -4,22 +4,30 @@ import { RenderFile } from "@/molecules";
 import {
   FileExplorerWrapper,
   FilesWrapper,
-  StyledFileExplorerContent,
+  StyledFileExplorerContentBox,
   StyledFileExplorerFoldersWrapper,
 } from "./FileExplorer.styles";
-import { FileExplorerToolbar } from "@/organisms";
+import {
+  FileExplorerContentToolbar,
+  FileExplorerFolders,
+  FileExplorerFolderToolbar,
+} from "../../organisms";
+import { ToolbarWrapper } from "../../atoms";
+import { IFsPaths } from "../../interfaces/fs";
 
 function FileExplorer(props: IFileExplorerProps) {
-  const {}                              = props;
-  const [path, setPath]                 = useState<string[]>([]);
-  const [dirData, setDirData]           = useState<{ name: string }[]>([]);
+  const {} = props;
+  const [paths, setPaths] = useState<IFsPaths | null>(null);
+  const [path, setPath] = useState<string[]>([]);
+  const [dirData, setDirData] = useState<{ name: string }[]>([]);
   const [forwardStack, setForwardStack] = useState<string[]>([]);
 
   useEffect(() => {
     (async () => {
-      const newPath = await (window as any)?.electronAPI?.getHomePath();
-          // CHANGE PATH SEPARATOR
-      setPath(newPath.split("/"));
+      const paths: IFsPaths = await (window as any)?.electronAPI?.getPaths();
+      setPaths(paths);
+        // TODO:CHANGE PATH SEPARATOR AS PER OS
+      setPath(paths.downloads.split("/"));
     })();
   }, []);
 
@@ -27,6 +35,7 @@ function FileExplorer(props: IFileExplorerProps) {
     (async () => {
       if (path.length) {
         const allFilesInfo = await (window as any)?.electronAPI?.readdir(
+          // TODO: ADD SEPARATOR AS PER THE OS
           path.join("/")
         );
         setDirData(allFilesInfo);
@@ -36,7 +45,7 @@ function FileExplorer(props: IFileExplorerProps) {
 
   function handleBackClick() {
     const pathClone = [...path];
-    const lastPath  = pathClone.pop();
+    const lastPath = pathClone.pop();
     setPath([...pathClone]);
     if (lastPath) setForwardStack([lastPath, ...forwardStack]);
   }
@@ -51,28 +60,37 @@ function FileExplorer(props: IFileExplorerProps) {
 
   return (
     <FileExplorerWrapper>
-      <StyledFileExplorerFoldersWrapper>
-        folders
-      </StyledFileExplorerFoldersWrapper>
-      <StyledFileExplorerContent>
-        <FileExplorerToolbar
+
+      <StyledFileExplorerContentBox>
+        <FileExplorerFolderToolbar
           path               = {path}
           handleBackClick    = {handleBackClick}
           forwardStack       = {forwardStack}
           handleForwardClick = {handleForwardClick}
         />
+        <FileExplorerFolders paths={paths} path={path} setPath={setPath}/>
+      </StyledFileExplorerContentBox>
+      
+      <StyledFileExplorerContentBox>
+        <FileExplorerContentToolbar
+          path={path}
+          handleBackClick={handleBackClick}
+          forwardStack={forwardStack}
+          handleForwardClick={handleForwardClick}
+        />
         <FilesWrapper>
           {dirData.map((o: any, index: number) => (
             <RenderFile
-              key             = {index}
-              path            = {path}
-              setPath         = {setPath}
-              setForwardStack = {setForwardStack}
+              key={index}
+              path={path}
+              setPath={setPath}
+              setForwardStack={setForwardStack}
               {...o}
             />
           ))}
         </FilesWrapper>
-      </StyledFileExplorerContent>
+      </StyledFileExplorerContentBox>
+      
     </FileExplorerWrapper>
   );
 }
