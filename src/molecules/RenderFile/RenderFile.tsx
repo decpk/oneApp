@@ -3,7 +3,7 @@ import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { connect } from "react-redux";
 import { FcFolder, FcFile } from "react-icons/fc";
 import { AiOutlineFile } from "react-icons/ai";
-import { setCurrentPath } from "../../redux/components/fileExplorerSlice";
+import { setCurrentPath } from "@/redux/fileExplorerSlice";
 import { RenderFileWrapper, StyledFileName } from "./RenderFile.styles";
 
 interface IRenderFile {
