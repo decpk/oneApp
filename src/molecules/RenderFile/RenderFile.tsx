@@ -1,17 +1,30 @@
 import React from "react";
+import { connect } from "react-redux";
+import { FcFolder, FcFile } from "react-icons/fc";
+import { AiOutlineFile } from "react-icons/ai";
+import { setCurrentPath } from "@/redux/fileExplorerSlice";
 import { RenderFileWrapper, StyledFileName } from "./RenderFile.styles";
 import { Tooltip } from "@mui/material";
 import { getFileIcon, getFolderIcon } from '../../constants/FileIcon';
 import { IRenderFile } from "./RenderFile.types";
 
-export default function RenderFile(props: IRenderFile): JSX.Element {
-  const { name, path, setPath, isDirectory, setForwardStack } = props;
+function RenderFile(props: IRenderFile): JSX.Element {
+  const {
+    name,
+    path,
+    setPath,
+    isDirectory,
+    setForwardStack,
+    fileExplorer,
+    setCurrentPath,
+  } = props;
 
+  
   function onDoubleClick() {
     if (isDirectory) setPath([...path, name]);
+    setCurrentPath([...path, name]);
     setForwardStack([]);
   }
-
   function onKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
     if (e.key === "Enter") onDoubleClick();
   }
@@ -37,3 +50,10 @@ export default function RenderFile(props: IRenderFile): JSX.Element {
     </Tooltip>
   );
 }
+
+const mapStateToProps = (state: { fileExplorer: any }, _props: any) => ({
+  fileExplorer: state.fileExplorer,
+});
+const mapDispatch = { setCurrentPath };
+
+export default connect(mapStateToProps, mapDispatch)(RenderFile);
