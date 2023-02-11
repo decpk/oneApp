@@ -1,6 +1,0 @@
-{
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": false,
-  "betterAlign.alignAfterTypeEnter": true,
-  "editor.formatOnType": false
-}
