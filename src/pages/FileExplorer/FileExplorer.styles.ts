@@ -10,5 +10,4 @@ export const FilesWrapper = styled.div`
   grid-template-columns: repeat(auto-fit, 100px);
   gap                  : 1rem;
   padding              : 1rem;
-  justify-content      : center;
 `;
