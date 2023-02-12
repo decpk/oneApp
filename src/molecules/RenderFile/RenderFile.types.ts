@@ -13,5 +13,4 @@ export interface IRenderFile {
   setPath          : React.Dispatch<React.SetStateAction<string[]>>;
   setForwardStack  : React.Dispatch<React.SetStateAction<string[]>>;
   fileExplorer     : any;
-  setCurrentPath   : ActionCreatorWithPayload<string[], string>;
 }

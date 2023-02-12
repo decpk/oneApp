@@ -1,20 +1,16 @@
 import React from "react";
-import { FcFolder, FcFile } from "react-icons/fc";
-import { AiOutlineFile } from "react-icons/ai";
-import { setCurrentPath } from "@/redux/fileExplorerSlice";
 import { RenderFileWrapper, StyledFileName } from "./RenderFile.styles";
 import { Tooltip } from "@mui/material";
 import { getFileIcon, getFolderIcon } from "../../constants/FileIcon";
 import { IRenderFile } from "./RenderFile.types";
 
 function RenderFile(props: IRenderFile): JSX.Element {
-  const { name, path, setPath, isDirectory, setForwardStack, setCurrentPath } = 
+  const { name, path, setPath, isDirectory, setForwardStack } = 
     props;
 
   function onDoubleClick() {
     if (isDirectory) {
       setPath([...path, name]);
-      setCurrentPath([...path, name]);
       setForwardStack([]);
     } else {
       (window as any)?.electronAPI?.openPath([...path, name].join('/'));
