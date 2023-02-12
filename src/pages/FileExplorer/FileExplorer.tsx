@@ -26,8 +26,9 @@ function FileExplorer(props: IFileExplorerProps) {
     (async () => {
       const paths: IFsPaths = await (window as any)?.electronAPI?.getPaths();
       setPaths(paths);
-          // TODO:CHANGE PATH SEPARATOR AS PER OS
-      setPath(paths.downloads.split("/"));
+      // TODO:CHANGE PATH SEPARATOR AS PER OS
+      const newPath = paths.downloads.split("/")
+      setPath(newPath);
     })();
   }, []);
 
@@ -72,7 +73,8 @@ function FileExplorer(props: IFileExplorerProps) {
 
       <StyledFileExplorerContentBox>
         <FileExplorerContentToolbar
-          path               = {path}
+          path = {path}
+          setPath={setPath}
           handleBackClick    = {handleBackClick}
           forwardStack       = {forwardStack}
           handleForwardClick = {handleForwardClick}
