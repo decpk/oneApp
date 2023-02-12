@@ -16,7 +16,7 @@ const FileExplorerFolderToolbar = (props: Props) => {
       <div style={{ display: 'flex', justifyContent: "space-between", width: "100%"}}>
         <IconAsButton
           onClick  = {handleBackClick}
-          disabled = {path.filter(Boolean).length === 1}
+          disabled = {path.length === 1}
         >
           <IoMdArrowRoundBack />
         </IconAsButton>

@@ -5,14 +5,12 @@ import {
   FileExplorerWrapper,
   FilesWrapper,
   StyledFileExplorerContentBox,
-  StyledFileExplorerFoldersWrapper,
 } from "./FileExplorer.styles";
 import {
   FileExplorerContentToolbar,
   FileExplorerFolders,
   FileExplorerFolderToolbar,
 } from "../../organisms";
-import { ToolbarWrapper } from "../../atoms";
 import { IFsPaths } from "../../interfaces/fs";
 
 function FileExplorer(props: IFileExplorerProps) {
@@ -35,9 +33,10 @@ function FileExplorer(props: IFileExplorerProps) {
   useEffect(() => {
     (async () => {
       if (path.length) {
+        const [homePath, ...rest] = path;
         const allFilesInfo = await (window as any)?.electronAPI?.readdir(
-              // TODO: ADD SEPARATOR AS PER THE OS
-          path.join("/")
+          // TODO: ADD SEPARATOR AS PER THE OS
+          homePath || '/' + rest.join('/')
         );
         setDirData(allFilesInfo);
       }
