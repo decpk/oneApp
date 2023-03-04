@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledFileExplorerInfoPanelWrapper = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 8px;
   align-items: center;
   font-size: 10px;
   padding: 0 0.5rem;
