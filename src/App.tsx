@@ -10,14 +10,14 @@ function Loading() {
   return <h4> Loading </h4>;
 }
 type IProps = {
-  store  : any;
+  store: any;
   history: any;
 };
 function App({ store, history }: IProps) {
   return (
-    <HistoryRouter history = {history}>
+    <HistoryRouter history={history}>
       <StyledAppWrapper>
-        <Provider store = {store}>
+        <Provider store={store}>
           <Appbar />
           <StyledPageContent>
             <Routes>
@@ -25,13 +25,13 @@ function App({ store, history }: IProps) {
                 const { Element, path, title } = app;
                 return (
                   <Route
-                    path    = {path}
-                    element = {
-                      <Suspense fallback = {<Loading />}>
+                    path={path}
+                    element={
+                      <Suspense fallback={<Loading />}>
                         <Element />
                       </Suspense>
                     }
-                    key = {title}
+                    key={title}
                   />
                 );
               })}

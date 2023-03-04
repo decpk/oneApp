@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { IFileExplorerProps } from "./FileExplorer.types";
 import { RenderFile } from "@/molecules";
 import {
+  FileExplorerContent,
+  FileExplorerInfoPanel,
   FileExplorerWrapper,
   FilesWrapper,
   StyledFileExplorerContentBox,
@@ -63,21 +65,26 @@ function FileExplorer(props: IFileExplorerProps) {
 
   return (
     <FileExplorerWrapper>
-      {/* FILE EXPLORER LEFT PANEL */}
-      <StyledFileExplorerContentBox>
-        <FileExplorerFolderToolbar />
-        <FileExplorerFolders />
-      </StyledFileExplorerContentBox>
+      <FileExplorerContent>
+        {/* FILE EXPLORER LEFT PANEL */}
+        <StyledFileExplorerContentBox>
+          <FileExplorerFolderToolbar />
+          <FileExplorerFolders />
+        </StyledFileExplorerContentBox>
 
-      {/* FILE EXPLORER MAIN DATA */}
-      <StyledFileExplorerContentBox>
-        <FileExplorerContentToolbar />
-        <FilesWrapper>
-          {dirData.map((o: any, index: number) => (
-            <RenderFile key={index} {...o} />
-          ))}
-        </FilesWrapper>
-      </StyledFileExplorerContentBox>
+        {/* FILE EXPLORER MAIN DATA */}
+        <StyledFileExplorerContentBox>
+          <FileExplorerContentToolbar />
+          <FilesWrapper>
+            {dirData.map((o: any, index: number) => (
+              <RenderFile key={index} {...o} />
+            ))}
+          </FilesWrapper>
+        </StyledFileExplorerContentBox>
+      </FileExplorerContent>
+      <FileExplorerInfoPanel>
+        <div>Total Files: {dirData.length}</div>
+      </FileExplorerInfoPanel>
     </FileExplorerWrapper>
   );
 }

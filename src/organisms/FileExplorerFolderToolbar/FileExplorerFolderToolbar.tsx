@@ -26,6 +26,7 @@ const FileExplorerFolderToolbar = (props: Props) => {
           display: "flex",
           justifyContent: "space-between",
           width: "100%",
+          fontWeight: "bold",
         }}
       >
         {/* BACK BUTTON */}
