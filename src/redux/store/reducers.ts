@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { createHashHistory } from "history";
 import { createReduxHistoryContext } from "redux-first-history";
-import fileExplorerSlice from "../components/fileExplorerSlice";
+import fileExplorerSlice from "../components/FileExplorer";
 
 export const { routerMiddleware, createReduxHistory, routerReducer } =
   createReduxHistoryContext({

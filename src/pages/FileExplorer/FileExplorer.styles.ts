@@ -6,9 +6,9 @@ export const FileExplorerWrapper = styled.div`
 `;
 
 export const StyledFileExplorerContentBox = styled.div`
-  height: 100vh;
-  overflow: auto;
-  display: grid;
+  height            : 100vh;
+  overflow          : auto;
+  display           : grid;
   grid-template-rows: 60px 1fr;
 `
 
@@ -21,5 +21,5 @@ export const FilesWrapper                     = styled.div`
   gap                  : 1rem;
   padding              : 1rem;
   grid-auto-rows       : 100px;
-  overflow: auto;
+  overflow             : auto;
 `;

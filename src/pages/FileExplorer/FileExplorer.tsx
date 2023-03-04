@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { fileExplorerActions } from "../../redux/store";
+import { useEffect, useState } from "react";
 import { IFileExplorerProps } from "./FileExplorer.types";
 import { RenderFile } from "@/molecules";
 import {
@@ -11,22 +12,33 @@ import {
   FileExplorerFolders,
   FileExplorerFolderToolbar,
 } from "../../organisms";
-import { IFsPaths } from "../../interfaces/fs";
+import { IFolderPaths } from "../../interfaces/fs";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 
 function FileExplorer(props: IFileExplorerProps) {
-  const {}                              = props;
-  const [paths, setPaths]               = useState<IFsPaths | null>(null);
-  const [path, setPath]                 = useState<string[]>([]);
-  const [dirData, setDirData]           = useState<{ name: string }[]>([]);
-  const [forwardStack, setForwardStack] = useState<string[]>([]);
+  const {} = props;
+
+  const dispatch = useAppDispatch();
+  const { path, dirData } = useAppSelector((state) => state.fileExplorer);
 
   useEffect(() => {
     (async () => {
-      const paths: IFsPaths = await (window as any)?.electronAPI?.getPaths();
-      setPaths(paths);
+      const paths: IFolderPaths = await (
+        window as any
+      )?.electronAPI?.getPaths();
+      dispatch(
+        fileExplorerActions.setFolderPaths({
+          FileExplorerfolderPaths: paths,
+        })
+      );
       // TODO:CHANGE PATH SEPARATOR AS PER OS
-      const newPath = paths.downloads.split("/")
-      setPath(newPath);
+      const newPath = paths?.downloads?.split("/");
+      if (newPath)
+        dispatch(
+          fileExplorerActions.setPath({
+            fileExplorerNewPath: newPath,
+          })
+        );
     })();
   }, []);
 
@@ -34,59 +46,35 @@ function FileExplorer(props: IFileExplorerProps) {
     (async () => {
       if (path.length) {
         const [homePath, ...rest] = path;
-        const allFilesInfo = await (window as any)?.electronAPI?.readdir(
+        const fileExplorerFolderData = await (
+          window as any
+        )?.electronAPI?.readdir(
           // TODO: ADD SEPARATOR AS PER THE OS
-          homePath || '/' + rest.join('/')
+          homePath || "/" + rest.join("/")
         );
-        setDirData(allFilesInfo);
+        dispatch(
+          fileExplorerActions.setDirData({
+            fileExplorerFolderData,
+          })
+        );
       }
     })();
   }, [path]);
 
-  function handleBackClick() {
-    const pathClone = [...path];
-    const lastPath  = pathClone.pop();
-    setPath([...pathClone]);
-    if (lastPath) setForwardStack([lastPath, ...forwardStack]);
-  }
-
-  function handleForwardClick() {
-    const [first, ...restForwardStack] = [...forwardStack];
-    if (first) {
-      setPath([...path, first]);
-      setForwardStack([...restForwardStack]);
-    }
-  }
-
   return (
     <FileExplorerWrapper>
+      {/* FILE EXPLORER LEFT PANEL */}
       <StyledFileExplorerContentBox>
-        <FileExplorerFolderToolbar
-          path               = {path}
-          handleBackClick    = {handleBackClick}
-          forwardStack       = {forwardStack}
-          handleForwardClick = {handleForwardClick}
-        />
-        <FileExplorerFolders paths = {paths} path = {path} setPath = {setPath} />
+        <FileExplorerFolderToolbar />
+        <FileExplorerFolders />
       </StyledFileExplorerContentBox>
 
+      {/* FILE EXPLORER MAIN DATA */}
       <StyledFileExplorerContentBox>
-        <FileExplorerContentToolbar
-          path = {path}
-          setPath={setPath}
-          handleBackClick    = {handleBackClick}
-          forwardStack       = {forwardStack}
-          handleForwardClick = {handleForwardClick}
-        />
+        <FileExplorerContentToolbar />
         <FilesWrapper>
           {dirData.map((o: any, index: number) => (
-            <RenderFile
-              key             = {index}
-              path            = {path}
-              setPath         = {setPath}
-              setForwardStack = {setForwardStack}
-              {...o}
-            />
+            <RenderFile key={index} {...o} />
           ))}
         </FilesWrapper>
       </StyledFileExplorerContentBox>

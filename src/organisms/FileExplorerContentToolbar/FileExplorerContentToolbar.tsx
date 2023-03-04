@@ -4,33 +4,28 @@ import { HiChevronRight } from "react-icons/hi";
 import { StyledBreadcrumbs } from "./FileExplorerContentToolbar.styles";
 import OneAppButton from "../../atoms/OneAppButton/OneAppButton";
 import { CgFormatSlash } from "react-icons/cg";
+import { useAppDispatch, useAppSelector } from "../../hooks/index";
+import { fileExplorerActions } from "../../redux/components/FileExplorer/fileExplorerSlice";
 
-interface IFileExplorerContentToolbar {
-  path              : string[];
-  setPath           : React.Dispatch<React.SetStateAction<string[]>>;
-  handleBackClick   : () => void;
-  handleForwardClick: () => void;
-  forwardStack      : string[];
-}
+function FileExplorerContentToolbar() {
+  const dispatch = useAppDispatch();
+  const { path } = useAppSelector((state) => state.fileExplorer);
 
-function FileExplorerContentToolbar(props: IFileExplorerContentToolbar) {
-  const { path, setPath, handleBackClick, handleForwardClick, forwardStack } = 
-    props;
   function handleClick(index: number) {
-    const newPath = path.slice(0, index + 1);
-    setPath(newPath);
+    const fileExplorerNewPath = path.slice(0, index + 1);
+    dispatch(fileExplorerActions.setPath({ fileExplorerNewPath }));
   }
 
   const breadcrumbs = path.map((pathStr, index) => (
     <OneAppButton
       sx={{
-        padding : "2px 6px !important",
+        padding: "2px 6px !important",
         minWidth: "auto !important",
-        color   : `${index === path.length - 1 ? "inherit" : "#777"} !important`,
+        color: `${index === path.length - 1 ? "inherit" : "#777"} !important`,
       }}
-      disabled = {index === path.length - 1}
-      onClick  = {() => handleClick(index)}
-      key      = {index}
+      disabled={index === path.length - 1}
+      onClick={() => handleClick(index)}
+      key={index}
     >
       <>{pathStr || <CgFormatSlash />}</>
     </OneAppButton>
@@ -38,7 +33,7 @@ function FileExplorerContentToolbar(props: IFileExplorerContentToolbar) {
 
   return (
     <ToolbarWrapper>
-      <StyledBreadcrumbs separator = {<HiChevronRight />} aria-label = "breadcrumb">
+      <StyledBreadcrumbs separator={<HiChevronRight />} aria-label="breadcrumb">
         {breadcrumbs}
       </StyledBreadcrumbs>
     </ToolbarWrapper>
