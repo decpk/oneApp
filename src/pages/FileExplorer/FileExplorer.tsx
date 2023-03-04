@@ -4,7 +4,6 @@ import { IFileExplorerProps } from "./FileExplorer.types";
 import { RenderFile } from "@/molecules";
 import {
   FileExplorerContent,
-  FileExplorerInfoPanel,
   FileExplorerWrapper,
   FilesWrapper,
   StyledFileExplorerContentBox,
@@ -16,6 +15,7 @@ import {
 } from "../../organisms";
 import { IFolderPaths } from "../../interfaces/fs";
 import { useAppDispatch, useAppSelector } from "../../hooks";
+import { FileExplorerInfoPanel } from "../../organisms";
 
 function FileExplorer(props: IFileExplorerProps) {
   const {} = props;
@@ -82,9 +82,7 @@ function FileExplorer(props: IFileExplorerProps) {
           </FilesWrapper>
         </StyledFileExplorerContentBox>
       </FileExplorerContent>
-      <FileExplorerInfoPanel>
-        <div>Total Files: {dirData.length}</div>
-      </FileExplorerInfoPanel>
+      <FileExplorerInfoPanel />
     </FileExplorerWrapper>
   );
 }
