@@ -3,7 +3,7 @@ import {
   StyledInfoHeading,
   StyledInfoWrapper,
 } from "./FileExplorerInfo.styles";
-import { FcInfo } from "react-icons/fc";
+import { FaInfoCircle } from "react-icons/fa";
 import { Tooltip } from "@mui/material";
 import { useMemo } from "react";
 import { useAppSelector } from "../../hooks/index";
@@ -58,7 +58,7 @@ const FileExplorerInfo = () => {
   return (
     <Tooltip title={<Info />} arrow>
       <StyledFileExplorerInfoWrapper>
-        <FcInfo />
+        <FaInfoCircle />
       </StyledFileExplorerInfoWrapper>
     </Tooltip>
   );

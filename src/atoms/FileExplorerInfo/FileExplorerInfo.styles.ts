@@ -4,8 +4,8 @@ export const StyledFileExplorerInfoWrapper = styled.div`
   display: flex;
   align-items: center;
   svg {
-    height: 16px;
-    width: 16px;
+    height: 12px;
+    width: 12px;
   }
 `;
 
