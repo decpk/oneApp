@@ -38,5 +38,5 @@ export const FileExplorerInfoPanel = styled.div`
   align-items: center;
   font-size: 10px;
   padding: 0 0.5rem;
-  border-top: 1px solid var(--background-color-secondary);
+  border-top: 1px solid var(--border-dark);
 `;
