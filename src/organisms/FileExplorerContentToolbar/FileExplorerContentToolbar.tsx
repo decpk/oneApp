@@ -1,5 +1,4 @@
-import React from "react";
-import { ToolbarWrapper } from "../../atoms";
+import { FileExplorerInfo, ToolbarWrapper } from "../../atoms";
 import { HiChevronRight } from "react-icons/hi";
 import { StyledBreadcrumbs } from "./FileExplorerContentToolbar.styles";
 import OneAppButton from "../../atoms/OneAppButton/OneAppButton";
