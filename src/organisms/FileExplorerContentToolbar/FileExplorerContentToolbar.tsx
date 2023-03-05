@@ -1,40 +1,31 @@
-import { FileExplorerInfo, ToolbarWrapper } from "../../atoms";
-import { HiChevronRight } from "react-icons/hi";
-import { StyledBreadcrumbs } from "./FileExplorerContentToolbar.styles";
-import OneAppButton from "../../atoms/OneAppButton/OneAppButton";
-import { CgFormatSlash } from "react-icons/cg";
-import { useAppDispatch, useAppSelector } from "../../hooks/index";
-import { fileExplorerActions } from "../../redux/components/FileExplorer/fileExplorerSlice";
+import { ToolbarWrapper } from "../../atoms";
+import { IconAsButton } from "../../atoms";
+import { BsList, BsGrid } from "react-icons/bs";
+import { useAppSelector, useAppDispatch } from "../../hooks/index";
+import { EShowItemAs } from "../../constants/FileExplorer";
+import { userPreferencesActions } from "../../redux/components/UserPreferences/UserPreferencesSlice";
 
 function FileExplorerContentToolbar() {
   const dispatch = useAppDispatch();
-  const { path } = useAppSelector((state) => state.fileExplorer);
 
-  function handleClick(index: number) {
-    const fileExplorerNewPath = path.slice(0, index + 1);
-    dispatch(fileExplorerActions.setPath({ fileExplorerNewPath }));
+  function changeShowItemType(type: EShowItemAs) {
+    dispatch(
+      userPreferencesActions.setShowItemAs({
+        itemType: type,
+      })
+    );
   }
-
-  const breadcrumbs = path.map((pathStr, index) => (
-    <OneAppButton
-      sx={{
-        padding: "2px 6px !important",
-        minWidth: "auto !important",
-        color: `${index === path.length - 1 ? "inherit" : "#777"} !important`,
-      }}
-      disabled={index === path.length - 1}
-      onClick={() => handleClick(index)}
-      key={index}
-    >
-      <>{pathStr || <CgFormatSlash />}</>
-    </OneAppButton>
-  ));
 
   return (
     <ToolbarWrapper>
-      <StyledBreadcrumbs separator={<HiChevronRight />} aria-label="breadcrumb">
-        {breadcrumbs}
-      </StyledBreadcrumbs>
+      <div>
+        <IconAsButton onClick={() => changeShowItemType(EShowItemAs.LIST)}>
+          <BsList />
+        </IconAsButton>
+        <IconAsButton onClick={() => changeShowItemType(EShowItemAs.ICON)}>
+          <BsGrid />
+        </IconAsButton>
+      </div>
     </ToolbarWrapper>
   );
 }

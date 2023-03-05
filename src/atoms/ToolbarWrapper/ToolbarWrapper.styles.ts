@@ -8,7 +8,14 @@ export const StyledToolbarWrapper = styled(Paper)`
   color: #ccc !important;
   padding: 1rem;
   display: flex;
+  justify-content: flex-end;
   align-items: center;
   gap: 1rem;
   border-bottom: 1px solid var(--border-dark);
+
+  svg,
+  image {
+    height: 16px;
+    width: 16px;
+  }
 `;

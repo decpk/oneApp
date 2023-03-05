@@ -1,12 +1,14 @@
 import React from "react";
-import { RenderFileWrapper, StyledFileName } from "./RenderFile.styles";
+import { RenderFileWrapper, StyledFileName } from "./RenderFileAsList.styles";
 import { Tooltip } from "@mui/material";
 import { getFileIcon, getFolderIcon } from "../../constants/FileIcon";
-import { IRenderFile } from "./RenderFile.types";
+import { IRenderFile } from "./RenderFileAsList.types";
 import { useAppDispatch, useAppSelector } from "../../hooks/index";
 import { fileExplorerActions } from "../../redux/components/FileExplorer/fileExplorerSlice";
 
-function RenderFile(props: IRenderFile): JSX.Element {
+type Props = {};
+
+const RenderFileAsList = (props: IRenderFile) => {
   const { name, isDirectory } = props;
   const { path } = useAppSelector((state) => state.fileExplorer);
 
@@ -29,7 +31,7 @@ function RenderFile(props: IRenderFile): JSX.Element {
   }
 
   return (
-    <Tooltip title={name} enterDelay={500} arrow>
+    <Tooltip title={name} arrow placement="top" followCursor>
       <RenderFileWrapper
         key={name}
         onDoubleClick={onDoubleClick}
@@ -44,6 +46,6 @@ function RenderFile(props: IRenderFile): JSX.Element {
       </RenderFileWrapper>
     </Tooltip>
   );
-}
+};
 
-export default RenderFile;
+export default RenderFileAsList;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { EShowItemAs } from "../../constants/FileExplorer";
 
 export const FileExplorerWrapper = styled.div`
   display: grid;
@@ -22,12 +23,22 @@ export const StyledFileExplorerContentBox = styled.div`
 
 export const StyledFileExplorerFoldersWrapper = styled.div``;
 
-export const FilesWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 100px);
-  align-items: flex-start;
-  gap: 1rem;
+export const FilesWrapper = styled.div<{ renderAs: EShowItemAs }>`
   padding: 1rem;
-  grid-auto-rows: 100px;
   overflow: auto;
+  ${({ renderAs }) => {
+    return renderAs === EShowItemAs.ICON
+      ? `
+      display: grid;
+        grid-template-columns: repeat(auto-fit, 100px);
+        align-items: flex-start;
+        gap: 1rem;
+        grid-auto-rows: 100px;
+        `
+      : `
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      `;
+  }}
 `;

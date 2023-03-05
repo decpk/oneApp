@@ -1,20 +1,27 @@
 import React from "react";
-import { StyledFileExplorerInfoPanelWrapper } from "./FileExplorerInfoPanel.styles";
+import {
+  StyledFileExplorerInfoPanelLeft,
+  StyledFileExplorerInfoPanelRight,
+  StyledFileExplorerInfoPanelWrapper,
+} from "./FileExplorerInfoPanel.styles";
 import { useAppSelector } from "../../hooks/index";
-import { FileExplorerInfo } from "../../atoms";
+import { FileExplorerBreadcrumbs, FileExplorerInfo } from "../../atoms";
+import { HiChevronRight } from "react-icons/hi";
 
 type Props = {};
 
 const FileExplorerInfoPanel = (props: Props) => {
   const { dirData } = useAppSelector((state) => state.fileExplorer);
-  console.log(
-    `🤞🤞🤞 ~ file: FileExplorerInfoPanel.tsx:9 ~ FileExplorerInfoPanel ~ dirData:`,
-    dirData
-  );
+
   return (
     <StyledFileExplorerInfoPanelWrapper>
-      <FileExplorerInfo />
-      <div>Total Files: {dirData.length}</div>
+      <StyledFileExplorerInfoPanelLeft>
+        <FileExplorerBreadcrumbs />
+      </StyledFileExplorerInfoPanelLeft>
+      <StyledFileExplorerInfoPanelRight>
+        <FileExplorerInfo />
+        <div>Total Files: {dirData.length}</div>
+      </StyledFileExplorerInfoPanelRight>
     </StyledFileExplorerInfoPanelWrapper>
   );
 };
