@@ -31,20 +31,18 @@ const RenderFileAsList = (props: IRenderFile) => {
   }
 
   return (
-    <Tooltip title={name} arrow placement="top" followCursor>
-      <RenderFileWrapper
-        key={name}
-        onDoubleClick={onDoubleClick}
-        onKeyDown={onKeyDown}
-        name={name}
-      >
-        <img
-          src={(isDirectory ? getFolderIcon : getFileIcon)(name.toLowerCase())}
-          alt="js"
-        />
-        <StyledFileName>{name}</StyledFileName>
-      </RenderFileWrapper>
-    </Tooltip>
+    <RenderFileWrapper
+      key={name}
+      onDoubleClick={onDoubleClick}
+      onKeyDown={onKeyDown}
+      name={name}
+    >
+      <img
+        src={(isDirectory ? getFolderIcon : getFileIcon)(name.toLowerCase())}
+        alt="js"
+      />
+      <StyledFileName>{name}</StyledFileName>
+    </RenderFileWrapper>
   );
 };
 
