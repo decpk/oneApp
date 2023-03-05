@@ -17,11 +17,13 @@ function FileExplorerContentToolbar() {
     event: React.MouseEvent<HTMLElement>,
     newShowItemType: EShowItemAs
   ) {
-    dispatch(
-      userPreferencesActions.setShowItemAs({
-        itemType: newShowItemType,
-      })
-    );
+    if (newShowItemType) {
+      dispatch(
+        userPreferencesActions.setShowItemAs({
+          itemType: newShowItemType,
+        })
+      );
+    }
   }
 
   return (
