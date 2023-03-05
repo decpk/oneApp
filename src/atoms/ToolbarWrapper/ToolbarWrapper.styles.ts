@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const StyledToolbarWrapper = styled(Paper)`
   background-color: var(--background-color-primary) !important;
-  height: 60px;
+  height: var(--toolbar-height);
   border-radius: 0 !important;
   color: #ccc !important;
   padding: 1rem;

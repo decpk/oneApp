@@ -18,7 +18,7 @@ export const StyledFileExplorerContentBox = styled.div`
   height: 100%;
   overflow: auto;
   display: grid;
-  grid-template-rows: 60px 1fr;
+  grid-template-rows: var(--toolbar-height) 1fr;
 `;
 
 export const StyledFileExplorerFoldersWrapper = styled.div``;
