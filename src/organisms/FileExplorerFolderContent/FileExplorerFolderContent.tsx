@@ -1,21 +1,9 @@
-import React from "react";
-import {
-  FilesWrapper,
-  StyledFileExplorerDataWrapper,
-} from "./FileExplorerFolderContent.styles";
+import { StyledFileExplorerDataWrapper } from "./FileExplorerFolderContent.styles";
 import { RenderFile, RenderFileAsList } from "../../molecules";
 import { EShowItemAs } from "../../constants/FileExplorer";
 import { useAppSelector } from "../../hooks/index";
-import { setShowItemAs } from "../../redux/components/UserPreferences/reducer-helpers/setShowItemAs";
 
-type Props = {};
-
-const RenderAs = {
-  [EShowItemAs.ICON]: RenderFile,
-  [EShowItemAs.LIST]: RenderFileAsList,
-};
-
-const FileExplorerFolderContent = (props: Props) => {
+const FileExplorerFolderContent = () => {
   const { dirData } = useAppSelector((state) => state.fileExplorer);
   const { showItemAs } = useAppSelector(
     (state) => state.userPreferences.fileExplorer
