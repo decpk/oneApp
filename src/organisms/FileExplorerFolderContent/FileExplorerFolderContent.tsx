@@ -1,5 +1,9 @@
 import { StyledFileExplorerDataWrapper } from "./FileExplorerFolderContent.styles";
-import { RenderFile, RenderFileAsList } from "../../molecules";
+import {
+  RenderFile,
+  RenderFileAsGrid,
+  RenderFileAsList,
+} from "../../molecules";
 import { EShowItemAs } from "../../constants/FileExplorer";
 import { useAppSelector } from "../../hooks/index";
 
@@ -11,6 +15,9 @@ const FileExplorerFolderContent = () => {
   return (
     <StyledFileExplorerDataWrapper>
       {showItemAs === EShowItemAs.ICON ? <RenderFile data={dirData} /> : null}
+      {showItemAs === EShowItemAs.GRID ? (
+        <RenderFileAsGrid data={dirData} />
+      ) : null}
       {showItemAs === EShowItemAs.LIST ? (
         <RenderFileAsList data={dirData} />
       ) : null}

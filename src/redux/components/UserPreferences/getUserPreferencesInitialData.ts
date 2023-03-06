@@ -3,7 +3,7 @@ import { EShowItemAs } from "../../../constants/FileExplorer";
 
 const fileExplorerInitialState: IUserPreferencesInitialState = {
   fileExplorer: {
-    showItemAs: EShowItemAs.ICON,
+    showItemAs: EShowItemAs.GRID,
   },
 };
 

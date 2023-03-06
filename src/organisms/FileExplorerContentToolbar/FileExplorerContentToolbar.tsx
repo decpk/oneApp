@@ -1,6 +1,6 @@
 import { ToolbarWrapper } from "../../atoms";
-import { IconAsButton } from "../../atoms";
 import { BsList, BsGrid } from "react-icons/bs";
+import { MdViewList } from "react-icons/md";
 import { useAppSelector, useAppDispatch } from "../../hooks/index";
 import { EShowItemAs } from "../../constants/FileExplorer";
 import { userPreferencesActions } from "../../redux/components/UserPreferences/UserPreferencesSlice";
@@ -32,6 +32,9 @@ function FileExplorerContentToolbar() {
         <ToggleButtonGroup onChange={changeShowItemType} value={showItemAs}>
           <ToggleButton value={EShowItemAs.LIST} aria-label="centered">
             <BsList />
+          </ToggleButton>
+          <ToggleButton value={EShowItemAs.GRID} aria-label="centered">
+            <MdViewList />
           </ToggleButton>
           <ToggleButton value={EShowItemAs.ICON} aria-label="centered">
             <BsGrid />
