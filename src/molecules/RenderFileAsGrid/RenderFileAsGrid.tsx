@@ -6,8 +6,9 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 import "ag-grid-community/styles/ag-theme-balham.css";
 import "ag-grid-community/styles/ag-theme-material.css";
 import "ag-grid-community/styles/ag-theme-material-no-font.css";
-import { useAppSelector } from "../../hooks/index";
+import { useAppDispatch, useAppSelector } from "../../hooks/index";
 import { getFolderIcon, getFileIcon } from "../../constants/FileIcon";
+import { fileExplorerActions } from "../../redux/store";
 
 type Props = {
   data: Record<string, any>[];
@@ -28,6 +29,7 @@ const RenderFileAsGrid = (props: Props) => {
       field: "#",
       width: 60,
       pinned: "left",
+      suppressSizeToFit: true,
       cellRenderer: (colArgs) => {
         return colArgs.rowIndex + 1;
       },
@@ -83,7 +85,22 @@ const RenderFileAsGrid = (props: Props) => {
     },
   ]);
 
-  const { dirData } = useAppSelector((state) => state.fileExplorer);
+  const { path, dirData } = useAppSelector((state) => state.fileExplorer);
+  const dispatch = useAppDispatch();
+
+  function onRowDoubleClicked(args) {
+    const { isDirectory, name } = args.data;
+    if (isDirectory) {
+      dispatch(
+        fileExplorerActions.setPath({
+          fileExplorerNewPath: [...path, name],
+        })
+      );
+      dispatch(fileExplorerActions.setForwardStack({ newforwardStack: [] }));
+    } else {
+      (window as any)?.electronAPI?.openPath([...path, name].join("/"));
+    }
+  }
 
   return (
     <div style={{ height: "100%", width: "100%", overflow: "auto" }}>
@@ -92,6 +109,7 @@ const RenderFileAsGrid = (props: Props) => {
         rowData={dirData}
         columnDefs={columnDefs}
         rowSelection="multiple"
+        onRowDoubleClicked={onRowDoubleClicked}
       ></AgGridReact>
     </div>
   );
