@@ -3,9 +3,6 @@ import { AgGridReact } from "ag-grid-react";
 
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import "ag-grid-community/styles/ag-theme-balham.css";
-import "ag-grid-community/styles/ag-theme-material.css";
-import "ag-grid-community/styles/ag-theme-material-no-font.css";
 import { useAppDispatch, useAppSelector } from "../../hooks/index";
 import { getFolderIcon, getFileIcon } from "../../constants/FileIcon";
 import { fileExplorerActions } from "../../redux/store";

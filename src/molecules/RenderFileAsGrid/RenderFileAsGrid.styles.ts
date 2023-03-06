@@ -10,6 +10,10 @@ export const StyledAgGrid = styled(AgGridReact)`
   --ag-header-foreground-color: #ddd;
   --ag-data-color: #ddd;
   --ag-header-background-color: #191919;
+  --ag-font-size: 12px;
+  --ag-grid-size: 6px;
+
+  font-size: 12px !important;
   .ag-root-wrapper {
     border: none;
   }
