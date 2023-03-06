@@ -22,23 +22,3 @@ export const StyledFileExplorerContentBox = styled.div`
 `;
 
 export const StyledFileExplorerFoldersWrapper = styled.div``;
-
-export const FilesWrapper = styled.div<{ renderAs: EShowItemAs }>`
-  padding: 1rem;
-  overflow: auto;
-  ${({ renderAs }) => {
-    return renderAs === EShowItemAs.ICON
-      ? `
-      display: grid;
-        grid-template-columns: repeat(auto-fit, 100px);
-        align-items: flex-start;
-        gap: 1rem;
-        grid-auto-rows: 100px;
-        `
-      : `
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-      `;
-  }}
-`;

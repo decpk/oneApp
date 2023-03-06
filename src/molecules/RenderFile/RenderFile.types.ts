@@ -1,6 +1,6 @@
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
-export interface IRenderFile {
+export interface IFile {
   isDirectory: boolean;
   isFile: boolean;
   isSymbolicLink: boolean;
@@ -11,4 +11,7 @@ export interface IRenderFile {
   name: string;
   setForwardStack: React.Dispatch<React.SetStateAction<string[]>>;
   fileExplorer: any;
+}
+export interface IRenderFile {
+  data: Array<Record<string, any>>;
 }

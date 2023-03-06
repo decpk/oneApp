@@ -3,6 +3,7 @@ import FileExplorerContentToolbar from "./FileExplorerContentToolbar";
 import FileExplorerFolderToolbar from "./FileExplorerFolderToolbar";
 import FileExplorerFolders from "./FileExplorerFolders";
 import FileExplorerInfoPanel from "./FileExplorerInfoPanel";
+import FileExplorerFolderContent from "./FileExplorerFolderContent";
 
 export {
   Appbar,
@@ -10,4 +11,5 @@ export {
   FileExplorerFolderToolbar,
   FileExplorerFolders,
   FileExplorerInfoPanel,
+  FileExplorerFolderContent,
 };

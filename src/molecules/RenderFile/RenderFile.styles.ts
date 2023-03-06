@@ -1,5 +1,15 @@
 import styled from "styled-components";
 
+export const FilesWrapper = styled.div`
+  padding: 1rem;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 100px);
+  align-items: flex-start;
+  gap: 1rem;
+  grid-auto-rows: 100px;
+`;
+
 export const RenderFileWrapper = styled.button`
   display: flex;
   flex-direction: column;

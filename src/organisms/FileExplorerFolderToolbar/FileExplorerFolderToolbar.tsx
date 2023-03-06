@@ -5,9 +5,7 @@ import { useAppDispatch } from "../../hooks";
 import { fileExplorerActions } from "../../redux/components/FileExplorer/fileExplorerSlice";
 import { useAppSelector } from "../../hooks/index";
 
-type Props = {};
-
-const FileExplorerFolderToolbar = (props: Props) => {
+const FileExplorerFolderToolbar = () => {
   const { path, forwardStack } = useAppSelector((state) => state.fileExplorer);
   const dispatch = useAppDispatch();
 

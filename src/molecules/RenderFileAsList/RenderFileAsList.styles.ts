@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const StyledFilesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+`;
+
 export const RenderFileWrapper = styled.button`
   display: grid;
   grid-template-columns: 30px 1fr;

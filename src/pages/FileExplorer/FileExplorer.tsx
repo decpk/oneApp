@@ -1,11 +1,8 @@
 import { fileExplorerActions } from "../../redux/store";
-import React, { useEffect } from "react";
-import { IFileExplorerProps } from "./FileExplorer.types";
-import { RenderFile } from "@/molecules";
+import { useEffect } from "react";
 import {
   FileExplorerContent,
   FileExplorerWrapper,
-  FilesWrapper,
   StyledFileExplorerContentBox,
 } from "./FileExplorer.styles";
 import {
@@ -16,22 +13,11 @@ import {
 import { IFolderPaths } from "../../interfaces/fs";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { FileExplorerInfoPanel } from "../../organisms";
-import { EShowItemAs } from "../../constants/FileExplorer";
-import RenderFileAsList from "../../molecules/RenderFileAsList";
+import { FileExplorerFolderContent } from "../../organisms";
 
-const RenderAs = {
-  [EShowItemAs.ICON]: RenderFile,
-  [EShowItemAs.LIST]: RenderFileAsList,
-};
-
-function FileExplorer(props: IFileExplorerProps) {
-  const {} = props;
-
+function FileExplorer() {
   const dispatch = useAppDispatch();
-  const { path, dirData } = useAppSelector((state) => state.fileExplorer);
-  const { showItemAs } = useAppSelector(
-    (state) => state.userPreferences.fileExplorer
-  );
+  const { path } = useAppSelector((state) => state.fileExplorer);
 
   useEffect(() => {
     (async () => {
@@ -85,16 +71,11 @@ function FileExplorer(props: IFileExplorerProps) {
         {/* FILE EXPLORER MAIN DATA */}
         <StyledFileExplorerContentBox>
           <FileExplorerContentToolbar />
-          <FilesWrapper renderAs={showItemAs}>
-            {dirData.map((o: any, index: number) =>
-              React.createElement(RenderAs[showItemAs], {
-                key: index,
-                ...o,
-              })
-            )}
-          </FilesWrapper>
+          <FileExplorerFolderContent />
         </StyledFileExplorerContentBox>
       </FileExplorerContent>
+
+      {/* FILE EXPLORER INFO PANEL */}
       <FileExplorerInfoPanel />
     </FileExplorerWrapper>
   );

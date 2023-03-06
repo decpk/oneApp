@@ -1,5 +1,9 @@
 import React from "react";
-import { RenderFileWrapper, StyledFileName } from "./RenderFileAsList.styles";
+import {
+  RenderFileWrapper,
+  StyledFileName,
+  StyledFilesContainer,
+} from "./RenderFileAsList.styles";
 import { Tooltip } from "@mui/material";
 import { getFileIcon, getFolderIcon } from "../../constants/FileIcon";
 import { IRenderFile } from "./RenderFileAsList.types";
@@ -8,13 +12,13 @@ import { fileExplorerActions } from "../../redux/components/FileExplorer/fileExp
 
 type Props = {};
 
-const RenderFileAsList = (props: IRenderFile) => {
-  const { name, isDirectory } = props;
+const RenderFileAsList = ({ data }: IRenderFile) => {
   const { path } = useAppSelector((state) => state.fileExplorer);
 
   const dispatch = useAppDispatch();
 
-  function onDoubleClick() {
+  function onDoubleClick(fileInfo: Record<string, any>) {
+    const { isDirectory, name } = fileInfo;
     if (isDirectory) {
       dispatch(
         fileExplorerActions.setPath({
@@ -26,23 +30,35 @@ const RenderFileAsList = (props: IRenderFile) => {
       (window as any)?.electronAPI?.openPath([...path, name].join("/"));
     }
   }
-  function onKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
-    if (e.key === "Enter") onDoubleClick();
+  function onKeyDown(
+    e: React.KeyboardEvent<HTMLButtonElement>,
+    fileInfo: Record<string, any>
+  ) {
+    if (e.key === "Enter") onDoubleClick(fileInfo);
   }
 
   return (
-    <RenderFileWrapper
-      key={name}
-      onDoubleClick={onDoubleClick}
-      onKeyDown={onKeyDown}
-      name={name}
-    >
-      <img
-        src={(isDirectory ? getFolderIcon : getFileIcon)(name.toLowerCase())}
-        alt="js"
-      />
-      <StyledFileName>{name}</StyledFileName>
-    </RenderFileWrapper>
+    <StyledFilesContainer>
+      {data.map((o) => {
+        const { name, isDirectory } = o;
+        return (
+          <RenderFileWrapper
+            key={name}
+            onDoubleClick={() => onDoubleClick(o)}
+            onKeyDown={(e) => onKeyDown(e, o)}
+            name={name}
+          >
+            <img
+              src={(isDirectory ? getFolderIcon : getFileIcon)(
+                name.toLowerCase()
+              )}
+              alt="js"
+            />
+            <StyledFileName>{name}</StyledFileName>
+          </RenderFileWrapper>
+        );
+      })}
+    </StyledFilesContainer>
   );
 };
 

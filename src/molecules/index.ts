@@ -1,2 +1,4 @@
-import RenderFile from './RenderFile';
-export { RenderFile }
+import RenderFile from "./RenderFile";
+import RenderFileAsList from "./RenderFileAsList";
+
+export { RenderFile, RenderFileAsList };
