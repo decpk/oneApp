@@ -17,7 +17,7 @@ import { FileExplorerFolderContent } from "../../organisms";
 
 function FileExplorer() {
   const dispatch = useAppDispatch();
-  const { path, dirData } = useAppSelector((state) => state.fileExplorer);
+  const { path } = useAppSelector((state) => state.fileExplorer);
 
   useEffect(() => {
     (async () => {
