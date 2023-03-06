@@ -9,16 +9,13 @@ import "ag-grid-community/styles/ag-theme-material-no-font.css";
 import { useAppDispatch, useAppSelector } from "../../hooks/index";
 import { getFolderIcon, getFileIcon } from "../../constants/FileIcon";
 import { fileExplorerActions } from "../../redux/store";
+import { StyledAgGrid } from "./RenderFileAsGrid.styles";
 
 type Props = {
   data: Record<string, any>[];
 };
 
 function humanFileSize(size: number) {
-  console.log(
-    `🤞🤞🤞 ~ file: RenderFileAsGrid.tsx:18 ~ humanFileSize ~ size:`,
-    size
-  );
   var i = size == 0 ? 0 : Math.floor(Math.log(size) / Math.log(1024));
   return (
     (size / Math.pow(1024, i)).toFixed(2) * 1 +
@@ -40,7 +37,7 @@ const RenderFileAsGrid = (props: Props) => {
     },
     {
       field: "name",
-      minWidth: 300,
+      minWidth: 500,
       flex: 2,
       cellRenderer: (colArgs) => {
         const { data } = colArgs;
@@ -64,7 +61,15 @@ const RenderFileAsGrid = (props: Props) => {
       },
     },
     {
-      field: "size",
+      field: "Type",
+      width: "150px",
+      cellRenderer: (colArgs) => {
+        const { data } = colArgs;
+        return <>{data.isDirectory ? "Folder" : "File"}</>;
+      },
+    },
+    {
+      field: "Size",
       width: "150px",
       cellRenderer: (colArgs) => {
         const { data } = colArgs;
@@ -108,13 +113,13 @@ const RenderFileAsGrid = (props: Props) => {
 
   return (
     <div style={{ height: "100%", width: "100%", overflow: "auto" }}>
-      <AgGridReact
+      <StyledAgGrid
         className="ag-theme-alpine-dark"
         rowData={dirData}
         columnDefs={columnDefs}
         rowSelection="multiple"
         onRowDoubleClicked={onRowDoubleClicked}
-      ></AgGridReact>
+      ></StyledAgGrid>
     </div>
   );
 };
