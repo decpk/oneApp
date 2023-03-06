@@ -17,7 +17,7 @@ import { FileExplorerFolderContent } from "../../organisms";
 
 function FileExplorer() {
   const dispatch = useAppDispatch();
-  const { path } = useAppSelector((state) => state.fileExplorer);
+  const { path, dirData } = useAppSelector((state) => state.fileExplorer);
 
   useEffect(() => {
     (async () => {
@@ -50,11 +50,14 @@ function FileExplorer() {
           // TODO: ADD SEPARATOR AS PER THE OS
           homePath || "/" + rest.join("/")
         );
-        dispatch(
-          fileExplorerActions.setDirData({
-            fileExplorerFolderData,
-          })
-        );
+        const { dirData } = fileExplorerFolderData?.data ?? {};
+        if (dirData) {
+          dispatch(
+            fileExplorerActions.setDirData({
+              fileExplorerFolderData: dirData,
+            })
+          );
+        }
       }
     })();
   }, [path]);

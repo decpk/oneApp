@@ -1,4 +1,3 @@
-import { IFolderPaths } from "../../../../interfaces/fs";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { IFileExplorerInitialState } from "../FileExplorer.types";
 
