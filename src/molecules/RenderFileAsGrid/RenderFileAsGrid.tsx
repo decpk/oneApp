@@ -38,6 +38,9 @@ const RenderFileAsGrid = (props: Props) => {
         columnDefs={fileExplorerColumns}
         rowSelection="multiple"
         onRowDoubleClicked={onRowDoubleClicked}
+        onSortChanged={(e) => {
+          e.api.redrawRows();
+        }}
       ></StyledAgGrid>
     </div>
   );
