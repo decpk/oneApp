@@ -13,6 +13,10 @@ export const StyledAgGrid = styled(AgGridReact)`
   --ag-font-size: 12px;
   --ag-grid-size: 6px;
 
+  .ag-cell-focus:not(.ag-cell-range-selected):focus-within {
+    border: none;
+  }
+
   font-size: 12px !important;
   .ag-root-wrapper {
     border: none;
