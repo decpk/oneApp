@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/index";
 import { fileExplorerActions } from "../../redux/store";
 import { StyledAgGrid } from "./RenderFileAsGrid.styles";
 import { fileExplorerColumns } from "../../constants/FileExplorer";
+import { RowDoubleClickedEvent } from "ag-grid-community";
 
 type Props = {
   data: Record<string, any>[];
@@ -16,8 +17,8 @@ const RenderFileAsGrid = (props: Props) => {
   const { path, dirData } = useAppSelector((state) => state.fileExplorer);
   const dispatch = useAppDispatch();
 
-  function onRowDoubleClicked(args) {
-    const { isDirectory, name } = args.data;
+  function onRowDoubleClicked(event: RowDoubleClickedEvent<any>): void {
+    const { isDirectory, name } = event.data;
     if (isDirectory) {
       dispatch(
         fileExplorerActions.setPath({

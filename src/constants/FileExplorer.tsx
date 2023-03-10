@@ -1,11 +1,11 @@
 import {
   humanFileSize,
-  sortDateComparator,
   sortNumberComparator,
   sortStringComparator,
 } from "../utils";
 import { getFolderIcon, getFileIcon } from "../constants/FileIcon";
 import { Tooltip } from "@mui/material";
+import { ICellRendererParams, IRowNode } from "ag-grid-community";
 
 export enum EShowItemAs {
   ICON = "ICON",
@@ -18,9 +18,7 @@ export const fileExplorerColumns = [
     field: "#",
     width: 100,
     suppressSizeToFit: true,
-    cellRenderer: (colArgs) => {
-      return colArgs.rowIndex + 1;
-    },
+    cellRenderer: (colArgs: ICellRendererParams) => colArgs.rowIndex + 1,
   },
   {
     field: "name",
@@ -28,7 +26,7 @@ export const fileExplorerColumns = [
     sortable: true,
     resizable: true,
     comparator: sortStringComparator,
-    cellRenderer: (colArgs) => {
+    cellRenderer: (colArgs: ICellRendererParams) => {
       const { data } = colArgs;
       return (
         <div
@@ -61,13 +59,13 @@ export const fileExplorerColumns = [
     minWidth: 100,
     sortable: true,
     resizable: true,
-    comparator: (a, b, c, d) => {
+    comparator: (a: any, b: any, c: IRowNode, d: IRowNode) => {
       return sortNumberComparator(
         c.data.isDirectory ? 1 : 0,
         d.data.isDirectory ? 1 : 0
       );
     },
-    cellRenderer: (colArgs) => {
+    cellRenderer: (colArgs: ICellRendererParams) => {
       const { data } = colArgs;
       return <>{data.isDirectory ? "Folder" : "File"}</>;
     },
@@ -75,13 +73,12 @@ export const fileExplorerColumns = [
   {
     field: "Size",
     minWidth: 150,
-    flex: 1,
     sortable: true,
     resizable: true,
-    comparator: (a, b, c, d) => {
+    comparator: (a: any, b: any, c: IRowNode, d: IRowNode) => {
       return sortNumberComparator(c.data._stat.size, d.data._stat.size);
     },
-    cellRenderer: (colArgs) => {
+    cellRenderer: (colArgs: ICellRendererParams) => {
       const { data } = colArgs;
       return <>{humanFileSize(data._stat.size || 0)}</>;
     },
@@ -89,34 +86,32 @@ export const fileExplorerColumns = [
   {
     field: "Last Modified on",
     minWidth: 160,
-    flex: 2,
     sortable: true,
     resizable: true,
-    comparator: (a, b, c, d) => {
+    comparator: (a: any, b: any, c: IRowNode, d: IRowNode) => {
       return sortNumberComparator(
         c?.data?._stat.atimeMs,
         d?.data?._stat.atimeMs
       );
     },
-    cellRenderer: (colArgs) => {
+    cellRenderer: (colArgs: ICellRendererParams) => {
       const { data } = colArgs;
-      return <>{data._stat.atime.toLocaleString()}</>;
+      return <>{data._stat?.atime?.toLocaleString()}</>;
     },
   },
   {
     field: "Created on",
     minWidth: 180,
     sortable: true,
-    flex: 2,
-    comparator: (a, b, c, d) => {
+    comparator: (a: any, b: any, c: IRowNode, d: IRowNode) => {
       return sortNumberComparator(
         c?.data?._stat.atimeMs,
         d?.data?._stat.atimeMs
       );
     },
-    cellRenderer: (colArgs) => {
+    cellRenderer: (colArgs: ICellRendererParams) => {
       const { data } = colArgs;
-      return <>{data._stat.birthtime.toLocaleString()}</>;
+      return <>{data._stat?.birthtime?.toLocaleString()}</>;
     },
   },
 ];
