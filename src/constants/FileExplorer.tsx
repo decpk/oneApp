@@ -58,7 +58,7 @@ export const fileExplorerColumns = [
   },
   {
     field: "Type",
-    width: 100,
+    minWidth: 100,
     sortable: true,
     resizable: true,
     comparator: (a, b, c, d) => {
@@ -74,7 +74,7 @@ export const fileExplorerColumns = [
   },
   {
     field: "Size",
-    width: 150,
+    minWidth: 150,
     flex: 1,
     sortable: true,
     resizable: true,
@@ -88,7 +88,7 @@ export const fileExplorerColumns = [
   },
   {
     field: "Last Modified on",
-    width: 160,
+    minWidth: 160,
     flex: 2,
     sortable: true,
     resizable: true,
@@ -105,7 +105,7 @@ export const fileExplorerColumns = [
   },
   {
     field: "Created on",
-    width: 180,
+    minWidth: 180,
     sortable: true,
     flex: 2,
     comparator: (a, b, c, d) => {
