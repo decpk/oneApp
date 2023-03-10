@@ -108,7 +108,6 @@ export const fileExplorerColumns = [
     width: 180,
     sortable: true,
     flex: 2,
-    resizable: true,
     comparator: (a, b, c, d) => {
       return sortNumberComparator(
         c?.data?._stat.atimeMs,
