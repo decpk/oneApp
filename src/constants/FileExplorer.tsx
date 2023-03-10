@@ -24,8 +24,8 @@ export const fileExplorerColumns = [
   {
     field: "name",
     minWidth: 500,
-    flex: 2,
     sortable: true,
+    resizable: true,
     comparator: sortStringComparator,
     cellRenderer: (colArgs) => {
       const { data } = colArgs;
@@ -48,8 +48,9 @@ export const fileExplorerColumns = [
   },
   {
     field: "Type",
-    width: 150,
+    width: 100,
     sortable: true,
+    resizable: true,
     comparator: (a, b, c, d) => {
       return sortNumberComparator(
         c.data.isDirectory ? 1 : 0,
@@ -64,7 +65,9 @@ export const fileExplorerColumns = [
   {
     field: "Size",
     width: 150,
+    flex: 1,
     sortable: true,
+    resizable: true,
     comparator: (a, b, c, d) => {
       return sortNumberComparator(c.data._stat.size, d.data._stat.size);
     },
@@ -75,8 +78,10 @@ export const fileExplorerColumns = [
   },
   {
     field: "Last Modified on",
-    width: 180,
+    width: 160,
+    flex: 2,
     sortable: true,
+    resizable: true,
     comparator: (a, b, c, d) => {
       return sortNumberComparator(
         c?.data?._stat.atimeMs,
@@ -92,6 +97,8 @@ export const fileExplorerColumns = [
     field: "Created on",
     width: 180,
     sortable: true,
+    flex: 2,
+    resizable: true,
     comparator: (a, b, c, d) => {
       return sortNumberComparator(
         c?.data?._stat.atimeMs,
