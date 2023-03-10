@@ -1,9 +1,9 @@
-import React from "react";
 import { IoMdArrowRoundBack, IoMdArrowRoundForward } from "react-icons/io";
 import { IconAsButton, ToolbarWrapper } from "../../atoms";
 import { useAppDispatch } from "../../hooks";
 import { fileExplorerActions } from "../../redux/components/FileExplorer/fileExplorerSlice";
 import { useAppSelector } from "../../hooks/index";
+import { StyledToolbarButtonsWrapper } from "./FileExplorerFolderToolbar.styles";
 
 const FileExplorerFolderToolbar = () => {
   const { path, forwardStack } = useAppSelector((state) => state.fileExplorer);
@@ -19,14 +19,7 @@ const FileExplorerFolderToolbar = () => {
 
   return (
     <ToolbarWrapper>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          width: "100%",
-          fontWeight: "bold",
-        }}
-      >
+      <StyledToolbarButtonsWrapper>
         {/* BACK BUTTON */}
         <IconAsButton onClick={handleBackClick} disabled={path.length === 1}>
           <IoMdArrowRoundBack />
@@ -39,7 +32,7 @@ const FileExplorerFolderToolbar = () => {
         >
           <IoMdArrowRoundForward />
         </IconAsButton>
-      </div>
+      </StyledToolbarButtonsWrapper>
     </ToolbarWrapper>
   );
 };
