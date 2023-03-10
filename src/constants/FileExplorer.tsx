@@ -5,6 +5,7 @@ import {
   sortStringComparator,
 } from "../utils";
 import { getFolderIcon, getFileIcon } from "../constants/FileIcon";
+import { Tooltip } from "@mui/material";
 
 export enum EShowItemAs {
   ICON = "ICON",
@@ -30,18 +31,27 @@ export const fileExplorerColumns = [
     cellRenderer: (colArgs) => {
       const { data } = colArgs;
       return (
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-          <img
-            src={(data.isDirectory ? getFolderIcon : getFileIcon)(
-              data.name.toLowerCase()
-            )}
-            alt="js"
-            style={{
-              height: "20px",
-              width: "20px",
-            }}
-          />
-          {data.name}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.75rem",
+          }}
+        >
+          <Tooltip title={data.name} arrow placement="top">
+            <img
+              src={(data.isDirectory ? getFolderIcon : getFileIcon)(
+                data.name.toLowerCase()
+              )}
+              alt="js"
+              style={{
+                height: "20px",
+                width: "20px",
+              }}
+            />
+          </Tooltip>
+
+          <span>{data.name}</span>
         </div>
       );
     },
