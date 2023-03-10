@@ -14,52 +14,18 @@ import { IFolderPaths } from "../../interfaces/fs";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { FileExplorerInfoPanel } from "../../organisms";
 import { FileExplorerFolderContent } from "../../organisms";
+import reduxConstants from "../../constants/redux.constants";
 
 function FileExplorer() {
   const dispatch = useAppDispatch();
   const { path } = useAppSelector((state) => state.fileExplorer);
 
   useEffect(() => {
-    (async () => {
-      const paths: IFolderPaths = await (
-        window as any
-      )?.electronAPI?.getPaths();
-      dispatch(
-        fileExplorerActions.setFolderPaths({
-          FileExplorerfolderPaths: paths,
-        })
-      );
-      // TODO:CHANGE PATH SEPARATOR AS PER OS
-      const newPath = paths?.downloads?.split("/");
-      if (newPath)
-        dispatch(
-          fileExplorerActions.setPath({
-            fileExplorerNewPath: newPath,
-          })
-        );
-    })();
+    dispatch({ type: reduxConstants.FILE_EXPLORER.GET_ALL_PATHS });
   }, []);
 
   useEffect(() => {
-    (async () => {
-      if (path.length) {
-        const [homePath, ...rest] = path;
-        const fileExplorerFolderData = await (
-          window as any
-        )?.electronAPI?.readdir(
-          // TODO: ADD SEPARATOR AS PER THE OS
-          homePath || "/" + rest.join("/")
-        );
-        const { dirData } = fileExplorerFolderData?.data ?? {};
-        if (dirData) {
-          dispatch(
-            fileExplorerActions.setDirData({
-              fileExplorerFolderData: dirData,
-            })
-          );
-        }
-      }
-    })();
+    dispatch({ type: reduxConstants.FILE_EXPLORER.READ_CURRENT_DIRECTORY });
   }, [path]);
 
   return (

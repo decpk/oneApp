@@ -3,7 +3,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { IFileExplorerInitialState } from "../FileExplorer.types";
 
 interface IFolderPathsPayload {
-  FileExplorerfolderPaths: IFolderPaths
+  FileExplorerfolderPaths: IFolderPaths;
 }
 
 export function setFolderPaths(

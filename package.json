@@ -59,6 +59,7 @@
     "react-router-dom": "^6.8.0",
     "redux": "^4.2.1",
     "redux-first-history": "^5.0.12",
+    "redux-saga": "^1.2.2",
     "styled-components": "^5.3.6",
     "typeface-roboto": "^1.1.13"
   }

@@ -1,9 +1,9 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getFileExplorerInitialData } from './getFileExplorerInitialState';
-import reducers from './reducer-helpers';
+import { createSlice } from "@reduxjs/toolkit";
+import { getFileExplorerInitialData } from "./getFileExplorerInitialState";
+import reducers from "./reducer-helpers";
 
 const fileExplorerSlice = createSlice({
-  name        : "fileExplorer",
+  name: "fileExplorer",
   initialState: getFileExplorerInitialData(),
   reducers,
 });

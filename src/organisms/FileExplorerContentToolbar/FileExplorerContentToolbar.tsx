@@ -10,6 +10,7 @@ import IconAsButton from "../../atoms/IconAsButton/IconAsButton";
 import { Tooltip } from "@mui/material";
 import { fileExplorerActions } from "../../redux/store";
 import { throttle } from "lodash";
+import reduxConstants from "../../constants/redux.constants";
 
 function FileExplorerContentToolbar() {
   const dispatch = useAppDispatch();
@@ -31,24 +32,8 @@ function FileExplorerContentToolbar() {
     }
   }
 
-  async function onRefresh() {
-    if (path.length) {
-      const [homePath, ...rest] = path;
-      const fileExplorerFolderData = await (
-        window as any
-      )?.electronAPI?.readdir(
-        // TODO: ADD SEPARATOR AS PER THE OS
-        homePath || "/" + rest.join("/")
-      );
-      const { dirData } = fileExplorerFolderData?.data ?? {};
-      if (dirData) {
-        dispatch(
-          fileExplorerActions.setDirData({
-            fileExplorerFolderData: dirData,
-          })
-        );
-      }
-    }
+  function onRefresh() {
+    dispatch({ type: reduxConstants.FILE_EXPLORER.READ_CURRENT_DIRECTORY });
   }
 
   return (
@@ -64,13 +49,13 @@ function FileExplorerContentToolbar() {
       </div>
       <div>
         <ToggleButtonGroup onChange={changeShowItemType} value={showItemAs}>
-          <ToggleButton value={EShowItemAs.LIST} aria-label="centered">
+          <ToggleButton value={EShowItemAs.LIST} aria-label="show as list">
             <BsList />
           </ToggleButton>
-          <ToggleButton value={EShowItemAs.GRID} aria-label="centered">
+          <ToggleButton value={EShowItemAs.GRID} aria-label="show as grid">
             <MdViewList />
           </ToggleButton>
-          <ToggleButton value={EShowItemAs.ICON} aria-label="centered">
+          <ToggleButton value={EShowItemAs.ICON} aria-label="show as icons">
             <BsGrid />
           </ToggleButton>
         </ToggleButtonGroup>
