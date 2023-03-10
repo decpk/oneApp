@@ -5,10 +5,8 @@ import { StyledAppWrapper, StyledPageContent } from "./App.styles";
 import apps from "./constants/Appbar.constants";
 import { Appbar } from "./organisms";
 import { HistoryRouter } from "redux-first-history/rr6";
+import { Loader } from "./atoms";
 
-function Loading() {
-  return <h4> Loading </h4>;
-}
 type IProps = {
   store: any;
   history: any;
@@ -27,7 +25,7 @@ function App({ store, history }: IProps) {
                   <Route
                     path={path}
                     element={
-                      <Suspense fallback={<Loading />}>
+                      <Suspense fallback={<Loader />}>
                         <Element />
                       </Suspense>
                     }

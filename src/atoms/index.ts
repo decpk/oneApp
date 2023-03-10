@@ -4,6 +4,7 @@ import ToolbarWrapper from "./ToolbarWrapper";
 import FileExplorerInfo from "./FileExplorerInfo";
 import FileExplorerBreadcrumbs from "./FileExplorerBreadcrumbs";
 import ToggleButtonGroup from "./ToggleButtonGroup";
+import Loader from "./Loader";
 
 export {
   AppbarItem,
@@ -12,4 +13,5 @@ export {
   FileExplorerInfo,
   FileExplorerBreadcrumbs,
   ToggleButtonGroup,
+  Loader,
 };

@@ -1,4 +1,3 @@
-import { fileExplorerActions } from "../../redux/store";
 import { useEffect } from "react";
 import {
   FileExplorerContent,
@@ -10,7 +9,6 @@ import {
   FileExplorerFolders,
   FileExplorerFolderToolbar,
 } from "../../organisms";
-import { IFolderPaths } from "../../interfaces/fs";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { FileExplorerInfoPanel } from "../../organisms";
 import { FileExplorerFolderContent } from "../../organisms";
