@@ -23,6 +23,7 @@ export const fileExplorerColumns = [
   {
     field: "name",
     minWidth: 500,
+    flex: 1,
     sortable: true,
     resizable: true,
     comparator: sortStringComparator,
